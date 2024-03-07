@@ -1,10 +1,10 @@
-package com.example.vietkast;
+package com.example.soundground;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VietkastApplicationTests {
+class SoundgroundApplicationTests {
 
 	@Test
 	void contextLoads() {
