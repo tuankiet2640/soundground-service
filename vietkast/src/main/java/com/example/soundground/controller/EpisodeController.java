@@ -1,6 +1,6 @@
 package com.example.soundground.controller;
 
-import com.example.soundground.entity.Episode;
+import com.example.soundground.entity.Track;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class EpisodeController {
 
     @GetMapping("/episodes")
-    public List<Episode> getEpisodes() {
+    public List<Track> getEpisodes() {
         return null;
     }
 }

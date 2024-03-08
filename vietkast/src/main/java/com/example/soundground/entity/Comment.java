@@ -7,11 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.UUID;
 
+import java.util.Date;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(name = "comment", schema = "soundground")
 public class Comment {
 
     @UUID
@@ -20,14 +23,15 @@ public class Comment {
     private Long id;
 
     private String text;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date postedAt;
 
-    @ManyToOne
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AppUser user;
 
-    @ManyToOne
-    private Episode episode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Track track;
 
-    private String date;
 
 
 }
