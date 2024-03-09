@@ -25,8 +25,10 @@ public class Playlist {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     private Boolean isPublic;
+    private String artwork;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private AppUser user;
 
     @ManyToMany

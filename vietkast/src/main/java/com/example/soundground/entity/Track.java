@@ -1,5 +1,8 @@
 package com.example.soundground.entity;
 
+import com.example.soundground.entity.AppUser;
+import com.example.soundground.entity.Comment;
+import com.example.soundground.entity.Playlist;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,10 +28,12 @@ public class Track {
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadDate;
+    private String artwork;
     private String genre;
     private Long playsCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") // Explicitly specify the column name
     private AppUser user;
 
     @ManyToMany(mappedBy = "tracks")
@@ -36,6 +41,4 @@ public class Track {
 
     @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
-
-
 }
