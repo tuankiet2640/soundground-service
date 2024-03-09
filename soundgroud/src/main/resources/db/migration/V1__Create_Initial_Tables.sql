@@ -3,8 +3,8 @@ CREATE SCHEMA IF NOT EXISTS soundground;
 CREATE TABLE soundground.app_user
 (
     user_id     BIGSERIAL PRIMARY KEY,
-    username    VARCHAR(255) NOT NULL,
-    email       VARCHAR(255) NOT NULL,
+    username    VARCHAR(255) NOT NULL UNIQUE,
+    email       VARCHAR(255) NOT NULL UNIQUE,
     password    VARCHAR(255) NOT NULL,
     date_joined TIMESTAMP    NOT NULL
 );
@@ -18,6 +18,8 @@ CREATE TABLE soundground.track
     artwork     VARCHAR(255),
     genre       VARCHAR(255),
     plays_count BIGINT,
+    audio_path  VARCHAR(255),
+    status      VARCHAR(50),
     user_id     BIGINT,
     FOREIGN KEY (user_id) REFERENCES soundground.app_user (user_id)
 );
@@ -30,7 +32,7 @@ CREATE TABLE soundground.playlist
     title         VARCHAR(255) NOT NULL,
     creation_date TIMESTAMP    NOT NULL,
     artwork       VARCHAR(255),
-    is_public     BOOLEAN      NOT NULL,
+    status      VARCHAR(50),
     user_id       BIGINT,
     FOREIGN KEY (user_id) REFERENCES soundground.app_user (user_id)
 );
@@ -74,5 +76,15 @@ CREATE TABLE soundground.playlist_tracks
     track_id BIGINT,
     PRIMARY KEY (playlist_id, track_id),
     FOREIGN KEY (playlist_id) REFERENCES soundground.playlist(playlist_id),
+    FOREIGN KEY (track_id) REFERENCES soundground.track(track_id)
+);
+
+-- Many-to-Many: User liked tracks
+CREATE TABLE soundground.user_liked_tracks
+(
+    user_id BIGINT,
+    track_id BIGINT,
+    PRIMARY KEY (user_id, track_id),
+    FOREIGN KEY (user_id) REFERENCES soundground.app_user(user_id),
     FOREIGN KEY (track_id) REFERENCES soundground.track(track_id)
 );

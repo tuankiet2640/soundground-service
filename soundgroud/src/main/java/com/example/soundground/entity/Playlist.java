@@ -1,5 +1,6 @@
 package com.example.soundground.entity;
 
+import com.example.soundground.constants.PlaylistStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +25,10 @@ public class Playlist {
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
-    private Boolean isPublic;
+
+    @Enumerated(EnumType.STRING)
+    private PlaylistStatus status;
+
     private String artwork;
 
     @ManyToOne(fetch = FetchType.LAZY)

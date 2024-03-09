@@ -49,8 +49,15 @@ public class AppUser {
     )
     private Set<AppUser> followers = new HashSet<>();
 
-
     @ManyToMany(mappedBy = "followers")
     private Set<AppUser> following = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_liked_tracks",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "track_id")
+    )
+    private Set<Track> favoritesTracks = new HashSet<>();
 
 }

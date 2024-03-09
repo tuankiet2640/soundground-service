@@ -10,9 +10,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2bkZVuOmReoAGdOZffU4mXPVAnW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,7 +26,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/projects/Vietkast/vietkast-service",
+    "last_opened_file_path": "D:/projects/Vietkast/soundgroud-service/soundgroud",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -36,6 +39,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706761064055</updated>
       <workItem from="1706761065022" duration="100000" />
+      <workItem from="1710003838169" duration="62000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,6 @@
 package com.example.soundground.entity;
 
+import com.example.soundground.constants.TrackStatus;
 import com.example.soundground.entity.AppUser;
 import com.example.soundground.entity.Comment;
 import com.example.soundground.entity.Playlist;
@@ -32,6 +33,11 @@ public class Track {
     private String genre;
     private Long playsCount;
 
+    private String audioPath;
+
+    @Enumerated(EnumType.STRING)
+    private TrackStatus status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private AppUser user;
@@ -41,4 +47,7 @@ public class Track {
 
     @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
+
+    @ManyToMany(mappedBy = "favoritesTracks")
+    private Set<AppUser> favoritedBy = new HashSet<>();
 }

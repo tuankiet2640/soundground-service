@@ -9,8 +9,8 @@ import java.util.List;
 @RestController
 public class TrackController {
 
-    @GetMapping("/episodes")
-    public List<Track> getEpisodes() {
+    @GetMapping("/tracks")
+    public List<Track> getTracks() {
         return null;
     }
 }
