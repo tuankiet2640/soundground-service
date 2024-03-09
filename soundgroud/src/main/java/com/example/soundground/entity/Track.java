@@ -33,7 +33,7 @@ public class Track {
     private Long playsCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // Explicitly specify the column name
+    @JoinColumn(name = "user_id")
     private AppUser user;
 
     @ManyToMany(mappedBy = "tracks")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class EpisodeController {
+public class TrackController {
 
     @GetMapping("/episodes")
     public List<Track> getEpisodes() {
