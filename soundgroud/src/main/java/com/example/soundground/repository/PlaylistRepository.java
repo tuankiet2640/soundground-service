@@ -28,6 +28,4 @@ public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     Page<Playlist> findPublicPlaylists(Pageable pageable);
 
     //find all liked playlist of a user
-    @Query("SELECT p FROM Playlist p JOIN p.favoritedBy u WHERE u.userId = :userId")
-    Page<Playlist> findLikedPlaylists(Long userId, Pageable pageable);
 }

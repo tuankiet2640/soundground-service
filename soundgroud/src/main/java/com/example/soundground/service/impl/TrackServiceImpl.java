@@ -6,6 +6,7 @@ import com.example.soundground.repository.TrackRepository;
 import com.example.soundground.service.TrackService;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.CacheEvict;
@@ -24,11 +25,15 @@ public class TrackServiceImpl implements TrackService {
     private final TrackRepository trackRepository;
     private final ModelMapper modelMapper;
 
-    private final LoadingCache<Long, Optional<TrackDTO>> trackCache = Caffeine.newBuilder()
-            .maximumSize(1000)
-            .expireAfterAccess(10, TimeUnit.MINUTES)
-            .build(key -> trackRepository.findById(key).map(track -> modelMapper.map(track, TrackDTO.class)));
+    private LoadingCache<Long, Optional<TrackDTO>> trackCache;
 
+    @PostConstruct
+    public void initTrackCache() {
+        trackCache = Caffeine.newBuilder()
+                .maximumSize(1000)
+                .expireAfterAccess(10, TimeUnit.MINUTES)
+                .build(key -> trackRepository.findById(key).map(track -> modelMapper.map(track, TrackDTO.class)));
+    }
     @Override
     @Cacheable(cacheNames = "tracks", key = "#pageable.pageNumber")
     public Page<TrackDTO> findTracks(Pageable pageable) {
@@ -43,14 +48,21 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     @CachePut(cacheNames = "track", key = "#result.trackId")
-    public TrackDTO save(Track track) {
-        Track savedTrack = trackRepository.save(track);
-        return modelMapper.map(savedTrack, TrackDTO.class);
+    public TrackDTO save(TrackDTO trackDTO) {
+        Track track = modelMapper.map(trackDTO, Track.class);
+        return modelMapper.map(trackRepository.save(track), TrackDTO.class);
     }
 
     @Override
     @CacheEvict(cacheNames = "track", key = "#id")
     public void deleteById(Long id) {
         trackRepository.deleteById(id);
+    }
+
+    @Override
+    public TrackDTO update(Long id, TrackDTO trackDTO) {
+        Track track = modelMapper.map(trackDTO, Track.class);
+        track.setTrackId(id);
+        return modelMapper.map(trackRepository.save(track), TrackDTO.class);
     }
 }

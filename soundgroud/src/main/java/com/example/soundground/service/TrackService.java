@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface TrackService {
     Page<TrackDTO> findTracks(Pageable pageable);
     Optional<TrackDTO> findById(Long id);
-    TrackDTO save(Track track);
+    TrackDTO save(TrackDTO trackDTO);
     void deleteById(Long id);
+    TrackDTO update(Long id, TrackDTO trackDTO);
+
 
 }
